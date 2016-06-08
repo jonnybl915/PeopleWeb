@@ -6,6 +6,7 @@ import spark.template.mustache.MustacheTemplateEngine;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -19,9 +20,17 @@ public class Main {
         Spark.get(
                 "/",
                 (request, response) -> {
-                    HashMap map = new HashMap();
+                    int offset = 0;
+                    String offStr = request.queryParams("offset");
+                    if (offStr != null){
+                        offset = Integer.valueOf(offStr);
+                    }
+                    ArrayList tempList = new ArrayList<> (personList.subList(offset, offset+20));
 
-                    map.put("personList", personList);
+                    HashMap map = new HashMap();
+                    map.put("personList", tempList);
+                    map.put("offsetUp", offset + 20);
+                    map.put("offsetDown", offset - 20);
                     return new ModelAndView(map, "home.html");
                 },
                 new MustacheTemplateEngine()
