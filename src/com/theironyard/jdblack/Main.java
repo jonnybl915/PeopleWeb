@@ -35,6 +35,15 @@ public class Main {
                 },
                 new MustacheTemplateEngine()
         );
+        Spark.get(
+                "/person",
+                (request, response) -> {
+                    int id = Integer.valueOf(request.queryParams("id"));
+                    Person p = personList.get(id - 1);
+                    return new ModelAndView(p, "person.html");
+                },
+                new MustacheTemplateEngine()
+        );
     }
     public static void readPeopleFile() throws FileNotFoundException {
 
