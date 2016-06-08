@@ -20,12 +20,8 @@ public class Main {
                 "/",
                 (request, response) -> {
                     HashMap map = new HashMap();
-                    int id = 1;
-                    for (Person person : personList)
-                        person.id = id;
-                    id++;
-                    Person person = personList.get(id);
-                    map.put("firstName", person.id);
+
+                    map.put("personList", personList);
                     return new ModelAndView(map, "home.html");
                 },
                 new MustacheTemplateEngine()
