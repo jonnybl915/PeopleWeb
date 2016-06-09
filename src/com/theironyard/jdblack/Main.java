@@ -6,12 +6,11 @@ import spark.template.mustache.MustacheTemplateEngine;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
-
+    static final int STEP = 20;
 
     static ArrayList<Person> personList = new ArrayList<>();
     public static void main(String[] args) throws FileNotFoundException {
@@ -25,12 +24,14 @@ public class Main {
                     if (offStr != null){
                         offset = Integer.valueOf(offStr);
                     }
-                    ArrayList tempList = new ArrayList<> (personList.subList(offset, offset+20));
+                    ArrayList tempList = new ArrayList<> (personList.subList(offset, offset+STEP));
 
                     HashMap map = new HashMap();
                     map.put("personList", tempList);
-                    map.put("offsetUp", offset + 20);
-                    map.put("offsetDown", offset - 20);
+                    map.put("offsetUp", offset + STEP);
+                    map.put("offsetDown", offset - STEP);
+                    map.put("showPrev", offset > 0);
+                    map.put("showNext", offset + STEP < personList.size());
                     return new ModelAndView(map, "home.html");
                 },
                 new MustacheTemplateEngine()

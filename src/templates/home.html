@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 <body>
 {{#personList}}
 <a href="/person?id={{id}}">{{firstName}}  {{lastName}}</a><br>
 {{/personList}}
-<a href="/?offset={{offsetDown}}">previous</a>
-<a href="/?offset={{offsetUp}}">next</a>
+
+{{#showPrev}}<a href="/?offset={{offsetDown}}">previous</a>{{/showPrev}}
+{{#showNext}}<a href="/?offset={{offsetUp}}">next</a>{{/showNext}}
 </body>
 </html>
