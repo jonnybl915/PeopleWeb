@@ -46,6 +46,7 @@ public class Main {
                 new MustacheTemplateEngine()
         );
     }
+
     public static void readPeopleFile() throws FileNotFoundException {
 
         File f = new File("people.csv");
